@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Sign-In Form</h2>
+    <form [formGroup]="signinform" (ngSubmit)="signin()">
+        <label for="username">Username</label>
+        <br/>
+        <input type="text" name="un" formControlName="un">
+        <span style="color:red" *ngIf="un && un.touched && un.invalid">Please Provide Input</span>
+        <br/>
+        <label for="username" >Password</label>
+        <br/>
+        <input type="text" name="pw" formControlName="ps">
+        <span style="color:red" *ngIf="ps && ps.invalid && ps.touched">Please Provide valid password</span>
+        <br/>
+        <br/>
+        <button class="btn btn-primary">SignIn</button>
+    </form>
+</div>

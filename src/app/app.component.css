@@ -1,0 +1,13 @@
+.container-fluid{
+    background-color: rgb(72, 72, 213);
+    color: white;
+    
+}
+.nav-link{
+    color:white;
+    opacity: 70%;
+}
+.navbar-brand{
+    font-size: 150%;
+    color: azure;
+}

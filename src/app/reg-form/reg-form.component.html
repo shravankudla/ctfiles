@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Registration Form</h2>
+    <form #data="ngForm" (ngSubmit)=submit(data)>
+        <div class="mb-3">
+          <label for="firstName" class="form-label" >Name</label>
+          <input #fname="ngModel" required minlength="3" maxlength="8" type="text" class="form-control" name="fname" ngModel>
+          <div *ngIf="fname.touched && fname.invalid">
+            <h3 style="color:tomato">Please provide valid input</h3>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="Age" class="form-label">Age</label>
+          <input #age="ngModel" required minlength="1" type="text" class="form-control" name="age" ngModel>
+          <div *ngIf="age.touched && age.invalid">
+            <h3 style="color:tomato">Please provide valid input</h3>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input #address="ngModel" required type="text" class="form-control" name="address" ngModel>
+            <div  *ngIf="address.touched && address.invalid">
+              <h3 style="color:tomato">Please provide valid input</h3>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input #phone="ngModel" required type="text" class="form-control" name="phone" ngModel>
+            <div *ngIf="phone.touched && phone.invalid ">
+              <h3 style="color:tomato">Please provide valid input</h3>
+            </div>
+          </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>

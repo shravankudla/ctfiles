@@ -1,0 +1,17 @@
+<div>
+    <table >
+        <tr style="background-color:rgb(83, 76, 76);">
+            <th>id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Street</th>
+        </tr>
+        <tr *ngFor="let i of info" >
+            <td >{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.address.street}}</td>
+        </tr>
+
+    </table>
+</div>

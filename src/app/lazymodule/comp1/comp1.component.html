@@ -1,0 +1,44 @@
+<div>
+    <table >
+        <tr style="background-color:rgb(83, 76, 76);">
+            <th>id</th>
+            <th>Student name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Phone</th>
+        </tr>
+        <tr *ngFor="let ui of userInfo" >
+            <td >{{ui.sid}}</td>
+            <td>{{ui.sname}}</td>
+            <td>{{ui.sage}}</td>
+            <td>{{ui.saddress}}</td>
+            <td>{{ui.phone}}</td>
+        </tr>
+
+    </table>
+</div>
+<br/>
+<!-- <button (click)="add()">Add Student</button>
+<br/> -->
+<br/>
+<form #data="ngForm" (ngSubmit)="delete(data)">
+    <div class="mb3">
+        <label for="id" class="form-label" >id</label>
+          <input #id="ngModel" type="text" class="form-control" name="id" ngModel>
+          <button #btn="ngModel" name="btn" ngModel>Delete Student</button>
+          <div *ngIf="btn.touched && id.invalid">
+            <h3 style="color:tomato">Please provide valid input</h3>
+          </div>
+    </div>
+</form>
+<!-- <div class="mb-3">
+    <label for="id" class="form-label">Id</label>
+    <input type="text">
+    <button (click)="delete()">Delete Student</button>
+</div> -->
+<!-- <button (click)="delete()">Delete Student</button> -->
+<br/>
+<br/>
+<!-- <button (click)="update()">Update Student</button> -->
+<br/>
+<br/>
