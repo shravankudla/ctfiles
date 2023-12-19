@@ -1,0 +1,354 @@
+enum Country {
+    CAN = 'Canada',
+    ENG = 'England',
+    IND = 'India'
+};
+enum phone {
+    // "canada"="56"
+    Canada = '56',
+    England = '88',
+    India = '91'
+}
+function countryToPhoneExtAPI(c: Country): Promise<string> {
+    let p: Promise<string> = new Promise<string>((resolve: any, reject: any) => {
+        resolve(phone[c])
+    });
+    return p;
+}
+async function getCountryToPhoneExtMapping() {
+    let obj: any = {};
+    for (const countries of Object.keys(Country)) {
+        obj[Country[countries]] = await countryToPhoneExtAPI(Country[countries])
+    }
+    return new Promise<any>((resolve, reject) => {
+        resolve(obj);
+        reject();
+    });
+    // return {Promise};
+}
+//  let obj: any = {
+// };
+// for(let key of Object.keys(Country))
+// {
+//     countryToPhoneExtAPI(Country[key as keyof typeof Country]).then(f => {
+//         obj[key] = f;
+//     })
+// }
+// let p: Promise<any> = new Promise<any>((resolve: any, reject: any) => {
+//     resolve(obj);
+// });
+// return p;
+// }
+// async function getCountryToPhoneExtMapping()
+// {
+//      let obj: any = {
+//     };
+//     // let fun= Object.values(Country)
+//     // console.log(fun)
+//     for(let key of Object.keys(Country))
+//     {
+//         // let fun= Object.values(Country)
+//         countryToPhoneExtAPI(Country[key as keyof typeof Country]).then(f => {
+//             obj[key] = f;
+//         })
+//     }
+//     let p: Promise<any> = new Promise<any>((resolve: any, reject: any) => {
+//         resolve(obj);
+//     });
+//     return p;
+// }
+// const colors = Object.keys(Color).filter((item) => {
+//     return isNaN(Number(item));
+// });
+// async function Main()
+// {
+//     let result: any = await getCountryToPhoneExtMapping();
+//     console.log(result);
+// }
+// Main();
+export async function getPhoneExtToCountryMapping() {
+    const mapCountry = new Map()
+    for (const countries of Object.keys(Country)) {
+        mapCountry.set(countryToPhoneExtAPI(Country[countries]), Country[countries])
+    }
+    console.log(mapCountry)
+    return new Promise<Map<number, string>>((resolve, reject) => {
+        resolve(mapCountry);
+    });
+}
+async function getPhoneExtforCountryMapping(c: any) {
+    // let countryPhone = countryToPhoneExtAPI('Canada')
+    // console.log(typeof countryPhone)
+    let obj = await countryToPhoneExtAPI(c)
+    const pr = new Promise<string>(function (resolve, reject) {
+        if (obj) {
+            resolve(obj)
+        }
+        else {
+            reject("not found")
+        }
+    });
+    return pr
+}
+async function Mains() {
+    let result: any = await getPhoneExtforCountryMapping("canada").catch(Error)
+    console.log(result);
+}
+Mains();
+async function getCountryForPhoneExt(phoneExt: any) {
+    let obj: any = {};
+    for (const countries of Object.keys(Country)) {
+        obj[Country[countries]] = await countryToPhoneExtAPI(Country[countries])
+    }
+    let country = Object.keys(obj).find(key => obj[key] === phoneExt)
+    const promise = new Promise((resolve, reject) => {
+        if (country) {
+            resolve(country)
+        } else {
+            reject("not found")
+        }
+    });
+    return promise
+}
+async function Mains4() {
+    let result: any = await getPhoneExtforCountryMapping("Canada").catch(Error)
+    console.log(result);
+}
+Mains4();
+===================================================================================================
+
+import { ThisReceiver } from '@angular/compiler';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GaurdService implements CanActivate{
+  constructor(private router:Router) { }
+  token:string="";
+   //val: string = localStorage.getItem('token');
+  canActivate(Activate:ActivatedRouteSnapshot,Router:RouterStateSnapshot){
+    if(this.token.length>0){
+      console.log("hi")
+      console.log(Activate)
+      console.log(Router)
+      return true; 
+    }
+    else {
+      //return  this.router.navigate(['/login'], {queryParams: {returnUrl: Router.url}});
+      return this.router.navigate(['/login']);
+    }   
+  }
+}
+  // canActivate(
+  //   next: ActivatedRouteSnapshot,
+  //   state: RouterStateSnapshot): boolean|UrlTree {
+  //      let url: string = state.url;
+  //          return this.checkLogin(url);
+  //      }
+  //      checkLogin(url: string):boolean|UrlTree  {
+  //       //console.log("Url: " + url)
+  //       //let val: string = localStorage.getItem('isUserLoggedIn');
+  //       if(this.token != null && this.token == "true"){
+  //          if(url == "/login")
+  //             this.router.navigate(['/dashboard']);
+  //             return true
+  //         //  else 
+  //         //     return true;
+  //       } else {
+  //         this.router.navigate(['/login']);
+  //         return false;        
+  //       }
+  //    }
+
+<a routerLink="/dashboard">Dashboard</a> <br>
+<a routerLink="/login">Login</a> <br>
+<a routerLink="/public">Public</a> <br>
+<a routerLink="**">404</a> <br>
+<a routerLink="">Unknown</a> <br>
+
+import { Routes } from '@angular/router'; 
+import { 
+    PublicComponent,
+    DashboardComponent,
+    LoginComponent,
+    Component404,
+} from '../components';
+import { GuardService } from './guard.service';
+
+export const routes: Routes = [
+    // Implement your solution here
+    //example { path: 'test', component: TestComponent, pathMatch: 'full'}
+    { path: '',redirectTo: '/public', pathMatch: 'full'},
+    { path: 'public', component: PublicComponent, pathMatch: 'full'},
+    { path: 'login', component: LoginComponent,canActivate: [GuardService], pathMatch: 'full'},
+    { path: 'dashboard', component: DashboardComponent, canActivate: [GuardService], pathMatch: 'full'},
+    { path: '404', component: Component404, pathMatch: 'full'},
+    { path: '**',component: Component404, pathMatch: 'full'},
+];
+
+==========================================================================================================
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+
+      </tr>
+    </thead>
+    <tbody *ngFor=" let result of results">
+      <td>{{result.id}}</td>
+      <td>{{result.title}}</td>
+
+    </tbody>
+  </table>
+  <section class="pagination">
+    <button class="first-page-btn" (click)="firstpage()" [disabled]="first">first</button>
+    <button class="previous-page-btn" (click)="previouspage()" [disabled]="previous">previous</button>
+    <button class="next-page-btn" (click)="nextpage()" [disabled]="next">next</button>
+    <button class="last-page-btn" (click)="lastpage()" [disabled]="last">last</button>
+  </section>
+  <hr>
+  <hr>
+  <p>{{currentpage}}</p>
+</div>
+
+import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+@Component({
+  selector: 'app-pages',
+  templateUrl: './pages.component.html',
+  styleUrls: ['./pages.component.css']
+})
+export class PagesComponent implements OnInit {
+  first:boolean=false;
+  previous:boolean=false;
+  next:boolean=false;
+  last:boolean=false;
+  currentpage:number=0
+  //totalpages:number=0
+  count:number=0
+  results:any[]=[];
+  ngOnInit(){
+ }
+  constructor(private http:HttpClient){
+    this.sub(1)   
+    // this.first=true
+    // this.previous=true
+    // this.next=false
+    // this.last=false 
+  }
+  sub(n:number){
+    // this.first=true;
+    // this.previous=true;
+    // this.next=true;
+    // this.last=true;
+    this.get(n)
+    .subscribe(
+      (data)=>{
+        // this.first=true;
+        // this.previous=true;
+        // this.next=true;
+        // this.last=true;
+        this.results=data;
+        // this.count=results["count"]
+       // console.log(this.results)
+        this.count=this.results.length
+         if(this.count==0){
+        //   this.first=false;
+        //   this.previous=false;
+        //   this.next=false;
+        //   this.last=false
+        this.first=true;
+        this.previous=true;
+        this.next=true;
+        this.last=true;
+           }
+      })
+  }
+  get(p:number){
+    return this.http.get<any>("https://jsonplaceholder.typicode.com/posts?page="+p)
+  }
+  firstpage(){ 
+    this.currentpage=1
+    this.sub(this.currentpage)
+   //setTimeout(() => {
+    this.first=true
+    this.previous=true
+    this.next=false
+    this.last=false
+  // }, 1000); 
+  }
+  previouspage(){
+    this.currentpage--
+    if(this.currentpage==0){
+      this.previous=true
+      this.first=true
+    }
+    else{
+      this.sub(this.currentpage)
+     // setTimeout(() => {
+        this.first=false
+        this.next=false
+        this.last=false  
+        this.previous=false
+     // }, 1000);     
+    }
+  }
+   nextpage(){
+    this.currentpage++
+    if(this.currentpage==9){
+      this.next=true
+      this.last=true
+    }
+    else{
+      this.sub(this.currentpage)
+     // setTimeout(() => {
+        this.last=false
+        this.next=false
+        this.first=false
+        this.previous=false
+     // }, 1000);
+    }
+   }
+   lastpage(){
+     this.currentpage=9
+     this.sub(this.currentpage)
+   //setTimeout(() => {
+     this.last=true
+     this.next=true
+     this.first=false
+     this.previous=false
+  // }, 1000);   
+   }
+}
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PagesComponent } from './pages.component';
+describe('PagesComponent', () => {
+  let component: PagesComponent;
+  let fixture: ComponentFixture<PagesComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [PagesComponent]
+    })
+      .compileComponents();
+
+    fixture = TestBed.createComponent(PagesComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+===========================================================================================================
+
+
+

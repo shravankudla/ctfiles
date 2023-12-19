@@ -1,0 +1,171 @@
+counter
+
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'counter',
+    template: `
+        <h2 class= "counter">
+            {{afterclickValue}}
+        </h2>
+        <button class="counter-button" (click)="increment()"> Click </button>
+    `,
+    styles: [`
+        .counter-button {
+            font-size: 1rem;
+            padding: 5px 10px;
+            color:  #585858;
+        }
+    `]
+})
+
+export class CounterComponent {
+    public afterclickValue: number = 42;
+    public increment(){
+        this.afterclickValue ++;
+    }
+}
+
+================================================================================================================
+
+Solar System
+
+import { Component, OnInit } from '@angular/core';
+interface Item {
+  title: string;
+  description: string;
+  descriptionVisible: boolean;
+}
+
+@Component({
+  selector: 'app-solar-system',
+  template: `
+   <button class="btn-show-all" (click)="handleShowAll()" >ShowAll</button>
+   <button class="btn-hide-all" (click)="handleHideAll()">HideAll</button>
+    <ul >
+     <li *ngFor="let d of data">
+       <header class="title">{{d.title}}</header>
+       <button class="btn-toggle-description" (click)="handleToggleItemDescription(d)" >Toggle Description</button>
+       <article  *ngIf="d.descriptionVisible" class="description">{{d.description}}</article>
+       </li>
+    </ul>
+  `
+})
+
+export class SolarSystemComponent implements OnInit {
+  data: Item[] = [
+    {
+      title: 'Mercury',
+      description: 'The first planet in the Solar System',
+      descriptionVisible: false
+    },
+    {
+      title: 'Venus',
+      description: 'The second planet in the Solar System',
+      descriptionVisible: false
+    },
+    {
+      title: 'Earth',
+      description: 'The third planet in the Solar System',
+      descriptionVisible: false
+    }
+  ];
+  constructor() { }
+  ngOnInit() { }
+  handleShowAll(): void {
+    this.data.map(d => {
+      d.descriptionVisible = true;;
+    })
+  }
+  handleHideAll(): void {
+    this.data.map(d => {
+      d.descriptionVisible = false;
+    })
+  }
+  handleToggleItemDescription(item: Item): void {
+    if (!item.descriptionVisible) {
+      this.handleHideAll();
+    }
+    item.descriptionVisible = !item.descriptionVisible;
+  }
+}
+
+============================================================================================================
+
+Rating
+
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'app-rating', host: { 'class': 'ratings__item' },
+  template:
+    `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star-o"></span>
+<h3>{{name}}</h3>
+<p>{{content}}</p>
+  `,
+})
+export class RatingComponent {
+  @Input('name')
+  public name: string;
+  @Input('content')
+  public content: string;
+  @Input('rate')
+  public rate: number;
+}
+
+@Component({
+  selector: 'app-average-rating', host: { 'class': 'ratings__average' },
+  template: `
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star-o" ></span>
+<span class="fa fa-star-o" ></span>
+  `,
+})
+export class AverageRatingComponent {
+  @Input('ratings')
+  public ratings: { name: string, content: string, rate: number }[];
+}
+@Component({
+  selector: 'app-ratings-list', host: { 'class': 'ratings' },
+  styles: [
+    `
+    h1 {
+      color: blue;
+      font-size: 18px;
+      font-weight: normal;
+    }
+    `
+  ],
+  template: `
+  <div class="ratings">
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star-o" ></span>
+<span class="fa fa-star-o" ></span><br>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star-o" ></span>
+<h3>{{ratings[0].name}}</h3>
+<p>{{ratings[0].content}}</p>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star-o" ></span>
+<span class="fa fa-star-o" ></span>
+<span class="fa fa-star-o" ></span>
+<span class="fa fa-star-o" ></span>
+<h3>{{ratings[1].name}}</h3>
+<p>{{ratings[1].content}}</p>
+  `,
+})
+export class RatingsListComponent {
+  @Input('ratings')
+  public ratings: { name: string, content: string, rate: number }[];
+}

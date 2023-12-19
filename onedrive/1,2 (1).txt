@@ -1,0 +1,116 @@
+import { Component } from '@angular/core';
+@Component({
+    selector: 'counter',
+    template: `
+        <h2 class="counter">
+            {{afterclickcountervalue}}
+        </h2>
+        <button class="counter-button" (click)="increment()">Click</button>
+    `,
+    styles: [`
+        .counter-button {
+            font-size: 1rem;
+            padding: 5px 10px;
+            color:  #585858;
+        }
+        .counter{
+            font-size:30px;
+        }
+    `]
+})
+
+export class CounterComponent {
+public countervalue:number=42
+public afterclickcountervalue:number=42
+public increment(){
+    this.countervalue++
+    this.afterclickcountervalue=this.countervalue
+}
+}
+1st
+
+ 
+import { Component, Input } from '@angular/core';
+@Component({
+selector: 'app-rating',
+template: `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star" ></span>
+<h3>{{name}}</h3>
+<p>{{content}}</p>
+
+`,
+
+styles:[`
+ .checked{
+   color:orange;
+ }
+`]
+})
+@Component({
+selector: 'app-average-rating',
+template: `
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked" ></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star" ></span>
+`,
+ styles:[`
+ .checked{
+   color:orange;
+ }
+`]
+}) 
+
+export class AverageRatingComponent {
+@Input('ratings')
+public ratings: {name: string, content: string, rate: number}[];
+}
+@Component({
+selector: 'app-ratings-list',
+
+template: `
+<div class="ratings">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star "></span><br>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star "></span>
+<h3>{{ratings[0].name}}</h3>
+<p>{{ratings[0].content}}</p>
+
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star "></span>
+<span class="fa fa-star"></span>
+<h3>{{ratings[1].name}}</h3>
+<p>{{ratings[1].content}}</p>
+</div>
+`,
+ styles:[`
+ .checked{
+   color:orange;}
+`]
+})
+
+export class RatingsListComponent {
+
+@Input('ratings')
+
+public ratings: {name: string, content: string, rate: number}[
+];
+}
+
+
+ 

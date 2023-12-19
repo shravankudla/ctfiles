@@ -1,0 +1,137 @@
+import { Component } from '@angular/core';
+@Component({
+
+  selector: 'like-dislike',
+
+  template: `
+
+      <div>
+
+        <br>
+
+        <br>
+
+        <button [ngClass]="{'like-button': true, 'liked': (likeState === 'liked')}" (click)="incrementLike()">Like | <span class="likes-counter">{{noOfLikes}}</span></button>
+
+        <button [ngClass]="{'dislike-button': true, 'disliked': (likeState === 'disliked')}" (click)="incrementDisLike()">Dislike | <span class="dislikes-counter">{{noOfDisLikes}}</span></button>
+
+      </div>
+
+  `,
+
+  styles: [`
+
+    .like-button, .dislike-button {
+
+        font-size: 1rem;
+
+        padding: 5px 10px;
+
+        color:   #585858;
+
+    }
+
+
+
+    .liked, .disliked {
+
+        font-weight: bold;
+
+        color: #1565c0;
+
+    }
+
+  `]
+
+})
+
+
+
+export class LikeDislikeComponent {
+
+noOfLikes: number = 100;
+
+  noOfDisLikes: number = 25;
+
+  likeClass = ['like-button'];
+
+  likeState: string = '';
+
+  incrementLike() {
+
+    switch (this.likeState) {
+
+      case '':
+
+        this.likeState = "liked"
+
+        this.noOfLikes = this.noOfLikes + 1;
+
+        break;
+
+      case 'liked':
+
+        this.likeState = ""
+
+        this.noOfLikes = this.noOfLikes - 1;
+
+        break;
+
+      case 'disliked':
+
+        this.likeState = "liked"
+
+        this.noOfLikes = this.noOfLikes + 1;
+
+        this.noOfDisLikes = this.noOfDisLikes - 1;
+
+        break;
+
+    }
+
+    // if(this.likeState == "disliked")
+
+    // this.likeClass.push('liked');
+
+  }
+
+  incrementDisLike() {
+
+    console.log(this.likeState);
+
+    switch (this.likeState) {
+
+      case '':
+
+        this.likeState = "disliked"
+
+        this.noOfDisLikes = this.noOfDisLikes + 1;
+
+        break;
+
+      case 'liked':
+
+        this.likeState = "disliked"
+
+        this.noOfLikes = this.noOfLikes - 1;
+
+        this.noOfDisLikes = this.noOfDisLikes + 1;
+
+        break;
+
+      case 'disliked':
+
+        this.likeState = ""
+
+        this.noOfDisLikes = this.noOfDisLikes - 1;
+
+        break;
+
+    }
+
+    // this.likeState = 'dislikesd';
+
+    // this.noOfDisLikes = this.noOfDisLikes + 1;
+
+  }
+}
