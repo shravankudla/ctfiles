@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AuMG31hatmjndbMJspk8SHpZAC0dyP/CxbEM8fMQzs0=",
+  "Source": "WebApiCoreWithEFCore",
+  "BasePath": "_content/WebApiCoreWithEFCore",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
