@@ -1,0 +1,151 @@
+-------------------1==DirectivedemoComponent----------------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-directivedemo',
+  templateUrl: './directivedemo.component.html',
+  // template:'<h1>Hello There</h1>',
+  styleUrls: ['./directivedemo.component.css']
+})
+export class DirectivedemoComponent {
+
+  courses=[
+    {id:12,name:'John',age:35},
+    {id:13,name:'James',age:38},
+    {id:14,name:'Kevin',age:37},
+    {id:15,name:'Tom',age:36},
+
+  ]
+
+  choice='No Choice'
+
+  addElement(){
+    this.courses.push({id:20,name:'Keanu',age:45});
+  }
+
+  myStyle={
+    width:'100px',
+    height:'150px',
+    background:'red',
+    color:'gray'
+  }
+
+  changeStyle(){
+    this.myStyle['background']="black";
+    this.myStyle['color']="white"
+  }
+
+  myClasses={
+    box:true,
+    border:false,
+    circle:false
+  }
+
+  changeShape(){
+    this.myClasses.border=true;
+    this.myClasses.circle=true
+  }
+
+}
+----------------2=DirectivedemoComponent.component.html--------
+<h1>Directive Understanding..</h1>
+<div *ngIf="courses.length > 0">
+    <h2>Students are there</h2>
+</div>
+<div *ngIf="courses.length == 0">
+    <h2>Students are not there</h2>
+</div>
+
+<ul *ngFor="let course of courses ">
+    <div *ngIf="(course.age)%2==0">
+        <li>{{course.id}}-{{course.name}}-{{course.age}}</li>
+    </div>    
+</ul>
+
+<div *ngIf="courses.length > 0 then ifBlock else elseBlock"></div>
+    <ng-template #ifBlock>
+        <h2>Students are Present</h2>
+    </ng-template>
+    <ng-template #elseBlock>
+        <h2>Students are not Present</h2>
+    </ng-template>
+
+<div [hidden]="courses.length>0">
+    "Students are Not Present"
+</div>
+<div [hidden]="courses.length==0">
+    "Students are Present"
+</div>
+
+<ul>
+    <li><Button (click)="choice='laptop'">Laptops</Button></li>
+    <li><Button (click)="choice='phones'">Phones</Button></li>
+</ul>
+<div [ngSwitch]="choice">
+    <div *ngSwitchCase="'laptop'">
+        <ol>
+            <li>Laptop 1</li>
+            <li>Laptop 2</li>
+            <li>Laptop 3</li>
+            <li>Laptop 4</li>
+        </ol>
+    </div>
+    <div *ngSwitchCase="'phones'">
+        <ol>
+            <li>phone 1</li>
+            <li>phone 2</li>
+            <li>phone 3</li>
+            <li>phone 4</li>
+        </ol>
+    </div>
+    <div *ngSwitchDefault> Please Select From Choice</div>
+</div>
+
+<button (click)="addElement()">Add Element</button>
+
+<div>
+    <ol *ngFor="let stud of courses; index as i; even as isEven">
+        <li>{{i}}-{{stud.name}} <span *ngIf="isEven">Even</span></li>
+    </ol>
+</div>
+
+<button (click)="changeStyle()">Change Style</button>
+
+<div [ngStyle]="myStyle">
+    Welcome To Citiustech
+</div>
+
+<div [ngClass]="myClasses">
+    <button (click)="changeShape()">Change Shape</button>
+</div>
+
+<h1 appChangeClrBgClr>My Directive Changed My Color</h1>
+--------------------3=directivedemo.component.css---------------------------------
+.box{
+    width: 100px;
+    height: 150px;
+    background-color: thistle;
+}
+
+.border{
+    border: 2px solid black;
+}
+
+.circle{
+    border-radius: 50%;
+}
+-----------------------4=CustomDirective.ts---------------------------------
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appChangeClrBgClr]'
+})
+export class ChangeClrBgClrDirective {
+
+  constructor(private elementRef:ElementRef) { 
+    this.elementRef.nativeElement.style.color='blue'
+    this.elementRef.nativeElement.style.background='yellow'
+  }
+
+}
+-------------------------------------------------------------------------
