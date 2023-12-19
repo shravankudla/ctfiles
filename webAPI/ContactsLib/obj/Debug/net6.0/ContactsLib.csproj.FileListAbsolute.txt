@@ -1,0 +1,28 @@
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.deps.json
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.runtimeconfig.json
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.dll
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.pdb
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.csproj.AssemblyReference.cache
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.AssemblyInfoInputs.cache
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.AssemblyInfo.cs
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.csproj.CoreCompileInputs.cache
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.dll
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\refint\ContactsLib.dll
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.pdb
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.genruntimeconfig.cache
+C:\Users\SalmanF\Desktop\WebAPIAss\ContactsLib\obj\Debug\net6.0\ref\ContactsLib.dll
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.deps.json
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.runtimeconfig.json
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.dll
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\bin\Debug\net6.0\ContactsLib.pdb
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.csproj.AssemblyReference.cache
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.AssemblyInfoInputs.cache
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.AssemblyInfo.cs
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.csproj.CoreCompileInputs.cache
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.dll
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\refint\ContactsLib.dll
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.pdb
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ContactsLib.genruntimeconfig.cache
+C:\Users\Shravan\OneDrive - CitiusTech\Documents\Training\.net\WebAPIAss\ContactsLib\obj\Debug\net6.0\ref\ContactsLib.dll
