@@ -1,0 +1,272 @@
+-------------------------------------app.module.ts---------------------------------------
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RegformComponent } from './regform/regform.component';
+import { SiginComponent } from './sigin/sigin.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http'; 
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    RegformComponent,
+    SiginComponent,
+    PagenotfoundComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+----------------------------------------------------------------------------------
+--------------------------app.component.html-------------------------------------
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Citiustech</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" routerLink="/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/regform" >Registration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/sign">Sign In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lazymodule/comp1">Component 1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lazymodule/comp2">Component 2</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- <app-regform></app-regform>
+    <app-sigin></app-sigin> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
+<router-outlet></router-outlet>
+--------------------------------------------------------------------------------------------------
+-------------------------------------regform.component.html---------------------------------------
+<form class="container" #reg="ngForm" (ngSubmit)="submit(reg)">
+    <h2>Registration Process:</h2>
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input #fname="ngModel" required minlength="4" maxlength="8" type="text" class="form-control" name="fname"
+            ngModel>
+        <div *ngIf="fname.touched && fname.invalid">
+            <p style="color: red;">Please Provide proper Input</p>
+        </div>
+        <div *ngIf="fname.touched && fname.pristine">
+            <p style="color: red;">Please Provide Input</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input #lname="ngModel" required minlength="4" maxlength="8" type="text" class="form-control" name="lname"
+            ngModel>
+        <div *ngIf="lname.touched && lname.invalid">
+            <p style="color: red;">Please Provide proper Input</p>
+        </div>
+        <div *ngIf="lname.touched && lname.pristine">
+            <p style="color: red;">Please Provide Input</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Enter Email</label>
+        <input #email="ngModel" required minlength="4" maxlength="8" type="email" class="form-control" name="email"
+            ngModel>
+        <div *ngIf="email.touched && email.invalid">
+            <p style="color: red;">Please Provide proper Input</p>
+        </div>
+        <div *ngIf="email.touched && email.pristine">
+            <p style="color: red;">Please Provide Input</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Enter Phone</label>
+        <input #phone="ngModel" required minlength="4" maxlength="8" type="text" class="form-control" name="phone"
+            ngModel>
+        <div *ngIf="phone.touched && phone.invalid">
+            <p style="color: red;">Please Provide proper Input</p>
+        </div>
+        <div *ngIf="phone.touched && phone.pristine">
+            <p style="color: red;">Please Provide Input</p>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
+
+<div class="container" *ngIf="regValues.fname.length>4">
+    <h1>Welcome {{regValues.fname}}, Registration Succesfful</h1>
+</div>
+------------------------------------------------------------------------------------------
+----------------------------------regform.component.ts------------------------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-regform',
+  templateUrl: './regform.component.html',
+  styleUrls: ['./regform.component.css']
+})
+export class RegformComponent {
+
+  regData:any
+  regValues!:{fname:string,lname:string,email:string,password:string}
+  submit(Data:any){
+    // console.log(regData.value);
+    // console.log(regData)
+    this.regData=Data.value
+    // console.log(this.regData.fname)
+    this.regValues={fname:this.regData.fname,lname:this.regData.lname,email:this.regData.email,password:this.regData.email}
+  }
+
+}
+------------------------------------------------------------------------------------------------
+-------------------------------------Reactive Form----------------------------------------------
+-------------------------------------signin.component.html--------------------------------------
+<div class="container">
+    <form [formGroup]="signinform" (ngSubmit)="signIn()">
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" name="un" formControlName="un">
+        <span style="color: red;" *ngIf="un && un.touched && un.pristine">Please Provide Input</span>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="ps" formControlName="ps">
+        <span style="color: red;" *ngIf="ps && ps.touched && ps.pristine && ps.invalid && ps.invalid">Please Provide Input</span>
+    </div>
+    <button class="btn btn-success">Sign In</button>
+</form>
+</div>
+--------------------------------------------------------------------------------------------------
+---------------------------------------sigin.componnet.ts-----------------------------------------
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators} from '@angular/forms'
+
+@Component({
+  selector: 'app-sigin',
+  templateUrl: './sigin.component.html',
+  styleUrls: ['./sigin.component.css']
+})
+export class SiginComponent {
+  signinform = new FormGroup({
+    un:new FormControl('',[Validators.required]),
+    ps:new FormControl('',[Validators.minLength(3),Validators.maxLength(8),Validators.required])
+  });
+
+  signIn(){
+    console.log(this.signinform.value)
+  }
+
+  get un(){
+    return this.signinform.get('un');
+  }
+
+  get ps(){
+    return this.signinform.get('ps');
+  }
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------Routing------------------------------------------------------------------------------------
+-------------------------------------------app.routing.module.ts----------------------------------------------------------------------
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { RegformComponent } from './regform/regform.component'; 
+import { SiginComponent } from './sigin/sigin.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomeComponent } from './home/home.component';
+
+const routes: Routes = [
+  {path:'', component:HomeComponent},
+  {path:'home', component:HomeComponent},
+  {path: 'regform', component:RegformComponent},
+  {path: 'sign', component:SiginComponent},
+  {path:'about', component:PagenotfoundComponent},
+  {path:'lazymodule', loadChildren:()=>import('./lazymodule/lazymodule.module').
+  then(mod=>mod.LazymoduleModule)},
+  {path: '**' ,component:PagenotfoundComponent}
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+-----------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------Wildcarts--------------------------------------------------------------------------
+----------------------------------------------------pagenotfound.component.ts-------------------------------------------------------------
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-pagenotfound',
+  templateUrl: './pagenotfound.component.html',
+  styleUrls: ['./pagenotfound.component.css']
+})
+export class PagenotfoundComponent {
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------Lazy Module----------------------------------------------------------------------
+--------------------------------------------------------lazymodule.routing.ts------------------------------------------------------------
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { Component1Component } from './component1/component1.component';
+import { Component2Component } from './component2/component2.component';
+
+console.log("Now Lazy Module got loaded")
+const routes: Routes = [
+  {path:'comp1', component:Component1Component},
+  {path:'comp2', component:Component2Component}
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class LazymoduleRoutingModule { }
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

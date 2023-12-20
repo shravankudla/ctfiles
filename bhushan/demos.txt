@@ -1,0 +1,185 @@
+--------------------------------------------------------------------------------------
+Query 1.
+How to add static html page in angular application?
+---------------
+Step 1. Create a html page in asset folder
+Step 2. Add <a href >in app.component.html as given below.
+
+<a href="/assets/aboutus.html">Click me</a>
+
+but explain drawbacks of it.
+--------------------------------------------------------------------------------------
+
+Demo 1 Interpolation
+---------------------
+app.component.ts
+----------------
+import { Component } from '@angular/core';
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  Training = ['AWS', 'Angular', 'Azure', 'Fullstack']
+
+  title = 'angularunderstaning';
+
+  presentDate = new Date();
+
+  getName(){
+    return 'Bhushan Paradkar'
+  }
+  a=20;
+  b=30;
+  car={
+    carName:'Harrier',
+    carPrice:1700000
+  }
+  siteurl = window.location.href
+
+
+}
+--------------------------
+app.component.html
+---------
+<h1 class="myh1">Hello , Welcome to Citiustech</h1>
+<a href="/assets/aboutus.html">Click me</a>
+<h2>My Name is {{getName()}}</h2>
+<h1>Addition of Two Numbers = {{a+b}}</h1>
+<h2>Name of Car = {{car.carName}} and Price = {{car.carPrice}}</h2>
+<h2>Our Site URL = {{siteurl}}</h2>
+<h2>Length of Training array is {{Training.length}}</h2>
+<h2>{{Training[1]}}</h2>
+<app-testcomponent></app-testcomponent>
+---------------------------------------------------------------------------------------
+Demo 2. Add new component and display in app.component.html
+--------------------------------
+Step1 create new component testcomponent
+Step2 after creating this component, paste it's selector in app.component.html
+<app-testcomponent></app-testcomponent>
+
+Here also show that by pasting same into index.html but it won't display anything
+then we will have to paste TestComponentComponent in bootstrap in app.module.ts file
+
+like this
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { TestcomponentComponent } from './testcomponent/testcomponent.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TestcomponentComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [TestcomponentComponent],
+  exports:[]
+})
+export class AppModule { }
+
+-----------------------------------------------------------------------------------------------
+Demo 3. Structural Directives
+----------------------------------
+Add given below code in app.component.ts
+----------
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  Training=['AWS','Angular','Azure','Fullstack']
+    
+  title = 'angularunderstaning';
+  
+}
+-----------------------------------
+add this code in app.component.html
+---------------
+<div *ngFor="let course of Training">
+    <ng-container *ngIf="(course == 'AWS' || course == 'Angular'); else elseTemplate">
+        <h1>{{course}} for Laterals</h1>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <h1>{{course}} for Freshers</h1>
+    </ng-template>
+</div>
+-------------------------------------------------------------------------------------------
+Demo 4. Pipe
+------------
+add given below code app.component.ts
+------------
+ title = 'angularunderstaning';
+
+  presentDate = new Date();
+-----------------------------
+add given below code in app.component.html
+-----------------
+<h1>{{title | uppercase}}</h1>
+<h1>{{title | lowercase}}</h1>
+<h1>Present Date = {{presentDate}}</h1>
+<h1>Present Date = {{presentDate | date}}</h1>
+--------------------------------------------------------------------------------------------
+Demo 5. Services
+--------------
+Step 1. Show first simple way. Add event in app.component.ts
+Step 2. In app.component.html add given below code.
+<button (click)="clickMe()">Click Me</button>
+
+Step 3. In app.component.ts file add method given below:
+	clickMe(){
+    alert("You have clicked Button");
+  }
+
+Step 4. Now do same thing with services.
+	create new service by firing command.
+	ng g s appservice/myservice
+Step 5. myservice.service.ts file will be created.
+Step 6. Now cut method code from app.component.ts and paste in myservice.service.ts.
+
+	import { Injectable } from '@angular/core';
+
+		@Injectable({
+ 		 providedIn: 'root'
+		})
+		export class MyserviceService {
+
+ 		 constructor() { }
+  		clickMe(){
+  		  alert("You have clicked Button and message coming from service now");
+  			}
+		}
+
+Step 7. Now go to app.component.html and change name of event of button.
+	<button (click)="btnclick()">Click Me</button>
+Step 8. Now open app.component.ts file and import newly created service on top.
+	import { MyserviceService } from './appservice/myservice.service';
+
+Step 9. Add given below code in class of app.component.ts 
+	btnclick(){
+    	const msgservice = new MyserviceService();
+    	msgservice.clickMe();
+  	}
+done.
+---------------------------------------------------------------------------------------------------------
+Demo 6.Adding Component to application and acces by selector
+	Step 1. create two new component header and footer
+	Step 2. Add their selectors in app.component.html
+
+Code for html of header and footer
+	header - <h1 style="text-align: center; color: steelblue;">Welcome To Citiustech</h1>
+	footer - <h2 style="text-align: center; color: steelblue;">All rights reserved with Citiustech</h2>
+----------------------------------------------------------------------------------------------------------------
+Demo 7. Add component in new module then import in appmodule.

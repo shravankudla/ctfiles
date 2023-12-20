@@ -1,0 +1,10 @@
+app.component.css--
+-----------------------
+.container{
+    width: 720px;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background-color: burlywood;
+    display: flex;
+}
+---------------------------------
